@@ -1,6 +1,6 @@
 Customizable rating bars with emojis, icons, custom images with half/full rating and dynamic feedback alerts.
 
-<img src="https://github.com/DevCodeSpace/rating_and_feedback_collector/blob/main/assets/banner1.png"/>
+<img src="https://github.com/DevCodeSpace/rating_and_feedback_collector/main/assets/banner1.png"/>
 
 ## Features
 
