@@ -19,7 +19,7 @@ Add dependency to your `pubspec.yaml` file & run Pub get
 
 ```yaml
 dependencies:
-  rating_and_feedback_collector: ^0.0.1
+  rating_and_feedback_collector: ^0.0.2
 ```
 And import package into your class file
 

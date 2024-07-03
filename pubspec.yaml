@@ -1,6 +1,6 @@
 name: rating_and_feedback_collector
 description: Customizable rating bars with emojis, icons, custom images with half/full rating and dynamic feedback alerts.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/DevCodeSpace/rating_and_feedback_collector
 issue_tracker: https://github.com/DevCodeSpace/rating_and_feedback_collector/issues
 documentation: https://pub.dev/documentation/rating_and_feedback_collector/latest/
