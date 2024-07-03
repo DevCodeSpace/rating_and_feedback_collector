@@ -1,0 +1,42 @@
+name: rating_and_feedback_collector
+description: Customizable rating bars with emojis, icons, custom images with half/full rating and dynamic feedback alerts.
+version: 0.0.1
+homepage: https://github.com/DevCodeSpace/rating_and_feedback_collector
+issue_tracker: https://github.com/DevCodeSpace/rating_and_feedback_collector/issues
+documentation: https://pub.dev/documentation/rating_and_feedback_collector/latest/
+
+environment:
+  sdk: '>=3.4.3 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  rate_us_on_store: ^0.0.3
+  google_fonts: ^6.2.1
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+screenshots:
+  - description: 'This image shows example of rating_bar'
+    path: screenshots/screenshot1.png
+
+  - description: 'This image shows example of feedback alert box'
+    path: screenshots/screenshot2.png
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  assets:
+    - assets/Images/
