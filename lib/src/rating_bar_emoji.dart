@@ -5,6 +5,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'feedback.dart';
 
 class RatingBarEmoji extends StatefulWidget {
+
+  /// feedback box UI
+  final FeedbackUIType? feedbackUIType;
+
   /// Current rating value.
   final double currentRating;
 
@@ -68,6 +72,7 @@ class RatingBarEmoji extends StatefulWidget {
 
   const RatingBarEmoji({
     super.key,
+    this.feedbackUIType = FeedbackUIType.alertBox,
     required this.currentRating,
     this.imageSize = 24,
     required this.onRatingChanged,
@@ -173,6 +178,9 @@ class RatingBarEmojiState extends State<RatingBarEmoji> {
     if (widget.showFeedbackForRatingsLessThan != 0) {
       if (updatedRating != 0.0) {
         if (updatedRating < widget.showFeedbackForRatingsLessThan!) {
+
+          widget.feedbackUIType == FeedbackUIType.alertBox ?
+
           showDialog(
             barrierDismissible: false,
             context: context,
@@ -181,32 +189,55 @@ class RatingBarEmojiState extends State<RatingBarEmoji> {
                 contentPadding: EdgeInsets.zero,
                 shape: RoundedRectangleBorder(
                   borderRadius:
-                      BorderRadius.circular(widget.alertDialogBorderRadius!),
+                  BorderRadius.circular(widget.alertDialogBorderRadius!),
                 ),
-                content: ClassFeedback(
-                  feedbackBoxTitle: widget.feedbackBoxTitle,
-                  textStyle: textStyle,
-                  lowRatingFeedbackTitle: widget.lowRatingFeedbackTitle,
-                  lowRatingFeedback: widget.lowRatingFeedback,
-                  showDescriptionInput: widget.showDescriptionInput,
-                  descriptionTitle: widget.descriptionTitle,
-                  descriptionPlaceHolder: widget.descriptionPlaceHolder,
-                  descriptionCharacterLimit: widget.descriptionCharacterLimit,
-                  submitButtonTitle: widget.submitButtonTitle,
-                  onSubmitTap: (selectedFeedback, feedback) {
-                    if (widget.onSubmitTap != null) {
-                      widget.onSubmitTap!(selectedFeedback, feedback);
-                    }
-                  },
-                  fontSize: fontSize,
-                  innerWidgetsBorderRadius: widget.innerWidgetsBorderRadius,
-                ),
+                content: funcGetFeedback(textStyle: textStyle, fontSize: fontSize),
               );
             },
+          )
+              :
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true, // Allows the bottom sheet to take up the full height of the screen
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(widget.alertDialogBorderRadius!),
+              ),
+            ),
+            builder: (BuildContext context) {
+              return Padding(
+                      padding: EdgeInsets.only( bottom: MediaQuery.of(context).viewInsets.bottom),
+                      child: funcGetFeedback(textStyle: textStyle, fontSize: fontSize),
+                    );
+            },
           );
+
         }
       }
     }
+  }
+
+  Widget funcGetFeedback({required TextStyle textStyle, required double fontSize}){
+
+    return ClassFeedback(
+      feedbackBoxTitle: widget.feedbackBoxTitle,
+      textStyle: textStyle,
+      lowRatingFeedbackTitle: widget.lowRatingFeedbackTitle,
+      lowRatingFeedback: widget.lowRatingFeedback,
+      showDescriptionInput: widget.showDescriptionInput,
+      descriptionTitle: widget.descriptionTitle,
+      descriptionPlaceHolder: widget.descriptionPlaceHolder,
+      descriptionCharacterLimit: widget.descriptionCharacterLimit,
+      submitButtonTitle: widget.submitButtonTitle,
+      onSubmitTap: (selectedFeedback, feedback) {
+        if (widget.onSubmitTap != null) {
+          widget.onSubmitTap!(selectedFeedback, feedback);
+        }
+      },
+      fontSize: fontSize,
+      innerWidgetsBorderRadius: widget.innerWidgetsBorderRadius,
+    );
+
   }
 
   /// Builds each icon in the rating bar.

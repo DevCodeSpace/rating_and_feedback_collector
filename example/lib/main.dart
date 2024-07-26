@@ -72,6 +72,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 });
               },
               showFeedbackForRatingsLessThan: 4,
+              feedbackUIType: FeedbackUIType.bottomSheet,
+              onSubmitTap: (selectedFeedback,description){
+
+                //use selectedFeedback!.key to get selected reason index
+                //use selectedFeedback!.value to get selected reason text
+                //use description to get selected reason text
+
+              },
             ),
           ),
           const Padding(
@@ -89,6 +97,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   _rating = rating;
                 });
               },
+              showFeedbackForRatingsLessThan: 4,
+              feedbackUIType: FeedbackUIType.bottomSheet,
             ),
           ),
           const Padding(
@@ -120,6 +130,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   _rating = rating;
                 });
               },
+              showFeedbackForRatingsLessThan: 4,
+              feedbackUIType: FeedbackUIType.bottomSheet,
             ),
           ),
         ],

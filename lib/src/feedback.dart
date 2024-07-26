@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'riho_text_field.dart';
 
+enum FeedbackUIType {
+  alertBox,
+  bottomSheet,
+}
+
 /// A StatefulWidget for gathering class feedback with dynamic form elements.
 class ClassFeedback extends StatefulWidget {
+
   /// feedback alert box title
   final String? feedbackBoxTitle;
 
