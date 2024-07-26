@@ -1,5 +1,4 @@
 library rating_bar;
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'feedback.dart';
@@ -7,6 +6,10 @@ import 'feedback.dart';
 /// A customizable rating bar widget that uses custom images for displaying ratings.
 
 class RatingBarCustomImage extends StatefulWidget {
+
+  /// feedback box UI
+  final FeedbackUIType? feedbackUIType;
+
   /// Current rating value
   final double currentRating;
 
@@ -74,6 +77,7 @@ class RatingBarCustomImage extends StatefulWidget {
 
   const RatingBarCustomImage({
     super.key,
+    this.feedbackUIType = FeedbackUIType.alertBox,
     required this.currentRating,
     required this.activeImages,
     required this.deActiveImages,
@@ -130,6 +134,9 @@ class RatingBarCustomImageState extends State<RatingBarCustomImage> {
     if (widget.showFeedbackForRatingsLessThan != 0) {
       if (updatedRating != 0.0) {
         if (updatedRating < widget.showFeedbackForRatingsLessThan!) {
+
+          widget.feedbackUIType == FeedbackUIType.alertBox ?
+
           showDialog(
             barrierDismissible: false,
             context: context,
@@ -140,30 +147,53 @@ class RatingBarCustomImageState extends State<RatingBarCustomImage> {
                   borderRadius:
                       BorderRadius.circular(widget.alertDialogBorderRadius!),
                 ),
-                content: ClassFeedback(
-                  feedbackBoxTitle: widget.feedbackBoxTitle,
-                  textStyle: textStyle,
-                  lowRatingFeedbackTitle: widget.lowRatingFeedbackTitle,
-                  lowRatingFeedback: widget.lowRatingFeedback,
-                  showDescriptionInput: widget.showDescriptionInput,
-                  descriptionTitle: widget.descriptionTitle,
-                  descriptionPlaceHolder: widget.descriptionPlaceHolder,
-                  descriptionCharacterLimit: widget.descriptionCharacterLimit,
-                  submitButtonTitle: widget.submitButtonTitle,
-                  onSubmitTap: (selectedFeedback, feedback) {
-                    if (widget.onSubmitTap != null) {
-                      widget.onSubmitTap!(selectedFeedback, feedback);
-                    }
-                  },
-                  fontSize: fontSize,
-                  innerWidgetsBorderRadius: widget.innerWidgetsBorderRadius,
-                ),
+                content: funcGetFeedback(textStyle: textStyle, fontSize: fontSize),
+              );
+            },
+          )
+          :
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true, // Allows the bottom sheet to take up the full height of the screen
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(widget.alertDialogBorderRadius!),
+              ),
+            ),
+            builder: (BuildContext context) {
+              return Padding(
+                padding: EdgeInsets.only( bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: funcGetFeedback(textStyle: textStyle, fontSize: fontSize),
               );
             },
           );
+
         }
       }
     }
+  }
+
+  Widget funcGetFeedback({required TextStyle textStyle, required double fontSize}){
+
+    return ClassFeedback(
+      feedbackBoxTitle: widget.feedbackBoxTitle,
+      textStyle: textStyle,
+      lowRatingFeedbackTitle: widget.lowRatingFeedbackTitle,
+      lowRatingFeedback: widget.lowRatingFeedback,
+      showDescriptionInput: widget.showDescriptionInput,
+      descriptionTitle: widget.descriptionTitle,
+      descriptionPlaceHolder: widget.descriptionPlaceHolder,
+      descriptionCharacterLimit: widget.descriptionCharacterLimit,
+      submitButtonTitle: widget.submitButtonTitle,
+      onSubmitTap: (selectedFeedback, feedback) {
+        if (widget.onSubmitTap != null) {
+          widget.onSubmitTap!(selectedFeedback, feedback);
+        }
+      },
+      fontSize: fontSize,
+      innerWidgetsBorderRadius: widget.innerWidgetsBorderRadius,
+    );
+
   }
 
   /// Builds each rating icon with touch capability.

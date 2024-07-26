@@ -1,3 +1,7 @@
+## 0.0.3
+
+* add option to open feedback in bottom sheet
+
 ## 0.0.2
 
 * Update README.md.

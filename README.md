@@ -19,7 +19,7 @@ Add dependency to your `pubspec.yaml` file & run Pub get
 
 ```yaml
 dependencies:
-  rating_and_feedback_collector: ^0.0.2
+  rating_and_feedback_collector: ^0.0.3
 ```
 And import package into your class file
 
@@ -99,6 +99,7 @@ double _rating = 0.0;
 | allowHalfRating (only for RatingBar)                  | bool?                                                     | Allows selection of half ratings.                                               |
 | isGoogleFont                   | bool?                                                     | set it true if you want to use google fonts else false                          |
 | fontFamilyName                 | String?                                                   | set your custom font family name or google font family name                     |
+| feedbackUIType                 | FeedbackUIType?                                           | want to show feedback box in alert view or in bottom sheet                      |
 | showFeedbackForRatingsLessThan | double?                                                   | Threshold rating value below which feedback box is shown.                       |
 | feedbackBoxTitle               | String?                                                   | Title for the feedback box                                                      |
 | lowRatingFeedbackTitle         | String?                                                   | Title for feedback options in the low rating feedback box.                      |
@@ -112,5 +113,5 @@ double _rating = 0.0;
 | showRedirectToStoreForRatingsGreaterThan                  | double?                                                   | Threshold rating value above which the app redirects to the store for a review. |
 | androidPackageName             | String?                                                   | Android package name for the app, used in the store redirect.                   |
 | iosBundleId                  | String?                                                   | iOS bundle ID for the app, used in the store redirect.                          |
-| innerWidgetsBorderRadius                  | double?                                                   | Border radius for the feedback dialog widgets.                 |
+| innerWidgetsBorderRadius                  | double?                                                   | Border radius for the feedback dialog widgets.                                  |
 | alertDialogBorderRadius                  | double?                                                   | Border radius for the feedback dialog.                                          |

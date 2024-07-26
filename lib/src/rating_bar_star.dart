@@ -5,6 +5,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'feedback.dart';
 
 class RatingBar extends StatefulWidget {
+
+  /// feedback box UI
+  final FeedbackUIType? feedbackUIType;
+
   /// current rating value.
   final double currentRating;
 
@@ -86,6 +90,7 @@ class RatingBar extends StatefulWidget {
 
   const RatingBar({
     super.key,
+    this.feedbackUIType = FeedbackUIType.alertBox,
     this.currentRating = 0.0,
     this.filledIcon = Icons.star,
     this.halfFilledIcon = Icons.star_half,
@@ -154,6 +159,9 @@ class RatingBarState extends State<RatingBar> {
     if (widget.showFeedbackForRatingsLessThan != 0) {
       if (updatedRating != 0.0) {
         if (updatedRating < widget.showFeedbackForRatingsLessThan!) {
+
+          widget.feedbackUIType == FeedbackUIType.alertBox ?
+
           showDialog(
             barrierDismissible: false,
             context: context,
@@ -162,32 +170,55 @@ class RatingBarState extends State<RatingBar> {
                 contentPadding: EdgeInsets.zero,
                 shape: RoundedRectangleBorder(
                   borderRadius:
-                      BorderRadius.circular(widget.alertDialogBorderRadius!),
+                  BorderRadius.circular(widget.alertDialogBorderRadius!),
                 ),
-                content: ClassFeedback(
-                  feedbackBoxTitle: widget.feedbackBoxTitle,
-                  textStyle: textStyle,
-                  lowRatingFeedbackTitle: widget.lowRatingFeedbackTitle,
-                  lowRatingFeedback: widget.lowRatingFeedback,
-                  showDescriptionInput: widget.showDescriptionInput,
-                  descriptionTitle: widget.descriptionTitle,
-                  descriptionPlaceHolder: widget.descriptionPlaceHolder,
-                  descriptionCharacterLimit: widget.descriptionCharacterLimit,
-                  submitButtonTitle: widget.submitButtonTitle,
-                  onSubmitTap: (selectedFeedback, feedback) {
-                    if (widget.onSubmitTap != null) {
-                      widget.onSubmitTap!(selectedFeedback, feedback);
-                    }
-                  },
-                  fontSize: fontSize,
-                  innerWidgetsBorderRadius: widget.innerWidgetsBorderRadius,
-                ),
+                content: funcGetFeedback(textStyle: textStyle, fontSize: fontSize),
+              );
+            },
+          )
+              :
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true, // Allows the bottom sheet to take up the full height of the screen
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(widget.alertDialogBorderRadius!),
+              ),
+            ),
+            builder: (BuildContext context) {
+              return Padding(
+                padding: EdgeInsets.only( bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: funcGetFeedback(textStyle: textStyle, fontSize: fontSize),
               );
             },
           );
+
         }
       }
     }
+  }
+
+  Widget funcGetFeedback({required TextStyle textStyle, required double fontSize}){
+
+    return ClassFeedback(
+      feedbackBoxTitle: widget.feedbackBoxTitle,
+      textStyle: textStyle,
+      lowRatingFeedbackTitle: widget.lowRatingFeedbackTitle,
+      lowRatingFeedback: widget.lowRatingFeedback,
+      showDescriptionInput: widget.showDescriptionInput,
+      descriptionTitle: widget.descriptionTitle,
+      descriptionPlaceHolder: widget.descriptionPlaceHolder,
+      descriptionCharacterLimit: widget.descriptionCharacterLimit,
+      submitButtonTitle: widget.submitButtonTitle,
+      onSubmitTap: (selectedFeedback, feedback) {
+        if (widget.onSubmitTap != null) {
+          widget.onSubmitTap!(selectedFeedback, feedback);
+        }
+      },
+      fontSize: fontSize,
+      innerWidgetsBorderRadius: widget.innerWidgetsBorderRadius,
+    );
+
   }
 
   /// Builds individual icons for the rating bar, handling full, half, and empty states.
