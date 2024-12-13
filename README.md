@@ -115,3 +115,8 @@ double _rating = 0.0;
 | iosBundleId                  | String?                                                   | iOS bundle ID for the app, used in the store redirect.                          |
 | innerWidgetsBorderRadius                  | double?                                                   | Border radius for the feedback dialog widgets.                                  |
 | alertDialogBorderRadius                  | double?                                                   | Border radius for the feedback dialog.                                          |
+## 🤝 Contributing
+[![](https://raw.githubusercontent.com/DevCodeSpace/rating_and_feedback_collector/refs/heads/main/assets/contributors.png)](https://github.com/DevCodeSpace/rating_and_feedback_collector/graphs/contributors)
+
+---
+>Made with ❤️ by the DevCodeSpace
