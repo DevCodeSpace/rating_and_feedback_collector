@@ -8,7 +8,6 @@ enum FeedbackUIType {
 
 /// A StatefulWidget for gathering class feedback with dynamic form elements.
 class ClassFeedback extends StatefulWidget {
-
   /// feedback alert box title
   final String? feedbackBoxTitle;
 

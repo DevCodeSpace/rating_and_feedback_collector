@@ -1,12 +1,13 @@
-library rating_bar;
+library;
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'feedback.dart';
 
 /// A customizable rating bar widget that uses custom images for displaying ratings.
 
 class RatingBarCustomImage extends StatefulWidget {
-
   /// feedback box UI
   final FeedbackUIType? feedbackUIType;
 
@@ -127,54 +128,54 @@ class RatingBarCustomImageState extends State<RatingBarCustomImage> {
   }
 
   /// Displays the feedback alert dialog based on the rating.
-  funcShowAlert(
+  void funcShowAlert(
       {required BuildContext context,
       required TextStyle textStyle,
       required double fontSize}) {
     if (widget.showFeedbackForRatingsLessThan != 0) {
       if (updatedRating != 0.0) {
         if (updatedRating < widget.showFeedbackForRatingsLessThan!) {
-
-          widget.feedbackUIType == FeedbackUIType.alertBox ?
-
-          showDialog(
-            barrierDismissible: false,
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                contentPadding: EdgeInsets.zero,
-                shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(widget.alertDialogBorderRadius!),
-                ),
-                content: funcGetFeedback(textStyle: textStyle, fontSize: fontSize),
-              );
-            },
-          )
-          :
-          showModalBottomSheet(
-            context: context,
-            isScrollControlled: true, // Allows the bottom sheet to take up the full height of the screen
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(widget.alertDialogBorderRadius!),
-              ),
-            ),
-            builder: (BuildContext context) {
-              return Padding(
-                padding: EdgeInsets.only( bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: funcGetFeedback(textStyle: textStyle, fontSize: fontSize),
-              );
-            },
-          );
-
+          widget.feedbackUIType == FeedbackUIType.alertBox
+              ? showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      contentPadding: EdgeInsets.zero,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            widget.alertDialogBorderRadius!),
+                      ),
+                      content: funcGetFeedback(
+                          textStyle: textStyle, fontSize: fontSize),
+                    );
+                  },
+                )
+              : showModalBottomSheet(
+                  context: context,
+                  isScrollControlled:
+                      true, // Allows the bottom sheet to take up the full height of the screen
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(widget.alertDialogBorderRadius!),
+                    ),
+                  ),
+                  builder: (BuildContext context) {
+                    return Padding(
+                      padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).viewInsets.bottom),
+                      child: funcGetFeedback(
+                          textStyle: textStyle, fontSize: fontSize),
+                    );
+                  },
+                );
         }
       }
     }
   }
 
-  Widget funcGetFeedback({required TextStyle textStyle, required double fontSize}){
-
+  Widget funcGetFeedback(
+      {required TextStyle textStyle, required double fontSize}) {
     return ClassFeedback(
       feedbackBoxTitle: widget.feedbackBoxTitle,
       textStyle: textStyle,
@@ -193,7 +194,6 @@ class RatingBarCustomImageState extends State<RatingBarCustomImage> {
       fontSize: fontSize,
       innerWidgetsBorderRadius: widget.innerWidgetsBorderRadius,
     );
-
   }
 
   /// Builds each rating icon with touch capability.

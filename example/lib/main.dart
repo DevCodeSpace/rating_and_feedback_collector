@@ -47,9 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Center(child: Text("Current Rating : $_rating")),
           const Padding(
             padding: EdgeInsets.only(top: 25),
-            child: Text(
-              "Rating bar with icons",
-            ),
+            child: Text("Rating bar with icons"),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 25),
@@ -73,12 +71,10 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               showFeedbackForRatingsLessThan: 4,
               feedbackUIType: FeedbackUIType.bottomSheet,
-              onSubmitTap: (selectedFeedback,description){
-
+              onSubmitTap: (selectedFeedback, description) {
                 //use selectedFeedback!.key to get selected reason index
                 //use selectedFeedback!.value to get selected reason text
                 //use description to get selected reason text
-
               },
             ),
           ),

@@ -1,3 +1,7 @@
+## 0.0.4
+
+* Updated all package dependencies to their latest compatible versions.
+
 ## 0.0.3
 
 * add option to open feedback in bottom sheet
